@@ -1,0 +1,3 @@
+app_name: Sentinel-Churn-Engine
+version: 0.1.0
+log_level: INFO

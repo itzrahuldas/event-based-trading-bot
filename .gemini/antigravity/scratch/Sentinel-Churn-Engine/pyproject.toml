@@ -1,0 +1,27 @@
+[project]
+name = "sentinel-churn-engine"
+version = "0.1.0"
+description = "Sentinel Churn Engine"
+authors = [
+    {name = "User", email = "user@example.com"},
+]
+dependencies = [
+    "polars",
+    "xgboost",
+    "streamlit",
+    "hydra-core",
+    "loguru",
+    "scikit-learn",
+    "mlflow",
+    "pytest",
+    "faker",
+    "pandas",
+    "ydata-profiling",
+    "plotly",
+]
+requires-python = ">=3.9"
+readme = "README.md"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

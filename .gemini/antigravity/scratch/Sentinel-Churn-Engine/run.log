@@ -1,0 +1,10 @@
+2026-01-19 12:40:36.470 | INFO     | src.run_pipeline:main:12 - Starting ETL Pipeline...
+2026-01-19 12:40:36.470 | INFO     | src.ingestion.loader:load_data:36 - Loading data from data/raw/telecom.db using query src/ingestion/sql/extract_churn_data.sql...
+2026-01-19 12:40:36.775 | INFO     | src.ingestion.loader:load_data:44 - Successfully loaded 1020 rows.
+2026-01-19 12:40:36.775 | INFO     | src.processing.cleaner:process:51 - Starting data cleaning process...
+2026-01-19 12:40:36.779 | INFO     | src.processing.cleaner:fix_negative_values:20 - Fixing 13 records with negative call_duration.
+2026-01-19 12:40:36.780 | INFO     | src.processing.cleaner:impute_missing:29 - Imputing 43 missing monthly_gb values with median: 16.64
+2026-01-19 12:40:36.783 | INFO     | src.processing.cleaner:deduplicate:41 - Dropped 20 duplicate customer records.
+2026-01-19 12:40:36.783 | INFO     | src.processing.cleaner:process:57 - Data cleaning completed.
+2026-01-19 12:40:36.789 | SUCCESS  | src.run_pipeline:main:35 - Pipeline finished. Data saved to data/processed/cleaned_data.parquet
+2026-01-19 12:40:36.789 | INFO     | src.run_pipeline:main:36 - Final shape: (1000, 8)
