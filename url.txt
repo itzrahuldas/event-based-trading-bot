@@ -1,0 +1,1 @@
+https://api-t1.fyers.in/api/v3/generate-authcode?client_id=0ZZUX4K9AO-100&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000&response_type=code&state=None

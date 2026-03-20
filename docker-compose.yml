@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  # Backend API (FastAPI)
+  backend:
+    build: .
+    container_name: trade-backend
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/tradedb
+      - MODE=LIVE
+    # Uses default CMD from Dockerfile (uvicorn)
+
+    # Trading Bot Worker (Live/Paper Trader)
+  worker:
+    build: .
+    container_name: trade-worker
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - backend
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/tradedb
+      - MODE=LIVE
+    command: python scripts/run_live.py --mode LIVE
+
+  # Frontend UI (Next.js)
+  frontend:
+    build: ./frontend
+    container_name: trade-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
+    depends_on:
+      - backend
+
+  # Database (PostgreSQL)
+  db:
+    image: postgres:15-alpine
+    container_name: trade-db
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tradedb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # Database Admin UI (Optional)
+  adminer:
+    image: adminer
+    container_name: db-admin
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
