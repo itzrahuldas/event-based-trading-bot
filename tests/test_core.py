@@ -8,7 +8,7 @@ sys.path.append(os.getcwd())
 
 from src.brokers import PaperBroker
 from src.risk_manager import RiskManager
-from src.models.domain import OrderRequest
+from src.models.trading_domain import OrderRequest
 from src.utils.config import load_config
 from src.utils.logger import configure_logger
 
